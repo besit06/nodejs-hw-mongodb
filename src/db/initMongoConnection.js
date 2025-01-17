@@ -11,7 +11,6 @@ export const initMongoDBCon = async () => {
         const db = getEnvVar(ENV_VARS.MONGODB_DB);
 
         const conURI = `mongodb+srv://${user}:${password}@${url}/${db}?retryWrites=true&w=majority&appName=Cluster0`;
-
         await mongoose.connect(conURI);
 
         console.log('Mongo connection successfully established!');
