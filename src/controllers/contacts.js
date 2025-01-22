@@ -1,5 +1,5 @@
 import createHttpError from "http-errors";
-import { ContactCollection } from "../models/contacts.js"
+import { ContactCollection } from "../models/contacts.js";
 
 
 export const getContactscontroller = async (req, res, next) => {
