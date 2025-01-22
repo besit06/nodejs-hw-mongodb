@@ -1,6 +1,6 @@
 import createHttpError from "http-errors";
 import { ContactCollection } from "../models/contacts.js";
-import { createContact } from "../services/contacts.js";
+import { createContact, deleteContact, updateContact } from "../services/contacts.js";
 
 
 export const getContactscontroller = async (req, res, next) => {
@@ -49,3 +49,38 @@ export const createContactsController = async (req, res, next) => {
     }
 };
 
+export const deleteContactController = async (req, res, next) => {
+
+    const { contactID } = req.params;
+
+    const contact = await deleteContact(contactID);
+
+    if (!contact) {
+        next(createHttpError(404, 'Contact not found'));
+        return;
+    }
+
+    res.status(204).send();
+};
+
+export const upsertContactsController = async (req, res, next) => {
+
+        const { contactID } = req.params;
+
+        const result = await updateContact(contactID, req.body, {
+    upsert: true,
+  });
+
+  if (!result) {
+    next(createHttpError(404, 'Contact not found'));
+    return;
+  }
+
+  const status = result.isNew ? 201 : 200;
+
+  res.status(status).json({
+    status,
+    message: `Successfully upserted a contact!`,
+    data: result.contact,
+  });
+};
