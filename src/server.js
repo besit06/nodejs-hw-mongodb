@@ -3,7 +3,9 @@ import cors from 'cors';
 import pino from 'pino-http';
 import dotenv from 'dotenv';
 import { getEnvVar } from './utils/getEnvVar.js';
-import { ContactCollection } from './models/contacts.js';
+import contactsRouter from './routers/contacts.js';
+import { errorHandler } from './middlewares/errorHandler.js';
+import { notFoundHandler } from './middlewares/notFoundhandler.js';
 
 dotenv.config();
 
@@ -23,58 +25,11 @@ export const setupServer = () => {
         }),
     );
 
-    app.get('/contacts', async (req, res) => {
-        try {
-            const contacts = await ContactCollection.find();
-            res.status(200).json({
-                status: 200,
-                message: 'Successfully found all contacts!',
-                data: contacts,
-            });
-        } catch (err) {
-            res.status(500).json({
-                status: 500,
-                message: 'Failed to fetch contacts',
-                error: err.message,
-            });
-        }
-    });
+    app.use(contactsRouter);
 
-     app.get('/contacts/:contactID', async (req, res) => {
-        const { contactID } = req.params;
-        try {
-            const contact = await ContactCollection.findById(contactID);
-            if (!contact) {
-                return res.status(404).json({
-                    message: 'Contact not found',
-                });
-            }
-            res.status(200).json({
-                status: 200,
-                message: `Successfully found contact with id ${contactID}!`,
-                data: contact,
-            });
-        } catch (err) {
-            res.status(500).json({
-                status: 500,
-                message: 'Failed to fetch contact',
-                error: err.message,
-            });
-        }
-    });
+    app.use(notFoundHandler);
 
-    app.use('*', (req, res, next) => {
-        res.status(404).json({
-            message: 'Not found',
-        });
-    });
-
-    app.use((err, req, res, next) => {
-        res.status(500).json({
-            message: 'Something went wrong',
-            error: err.message,
-        });
-    });
+    app.use(errorHandler);
 
     app.listen(PORT, () => {
         console.log(`Server is running on ${PORT}`);
