@@ -4,7 +4,7 @@ import { ContactCollection } from "../models/contacts.js";
 
 export const getContactscontroller = async (req, res, next) => {
     try {
-        const contacts = await ContactCollection();
+        const contacts = await ContactCollection.find();
 
         res.status(200).json({
                 status: 200,
@@ -21,7 +21,7 @@ export const getContactscontroller = async (req, res, next) => {
 
 export const getContactByIdController = async (req, res, next) => {
         const { contactID } = req.params;
-        const contact = await ContactCollection(contactID);
+        const contact = await ContactCollection.findById(contactID);
 
             if (!contact) {
                 throw createHttpError(404, 'Student not found');
