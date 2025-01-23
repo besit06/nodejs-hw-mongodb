@@ -24,10 +24,10 @@ export const updateContact = async (contactID, payload, options = {}) => {
         },
     );
 
-    if (!contact) return null;
+    if (!contact.value) return null;
 
     return {
-        contact,
+        contact: contact.value,
         isNew: false,
     };
 };
