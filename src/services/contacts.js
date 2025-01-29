@@ -19,15 +19,14 @@ export const updateContact = async (contactID, payload, options = {}) => {
         payload,
         {
             new: true,
-            includeResultMetadata: true,
             ...options,
         },
     );
 
-    if (!contact.value) return null;
+    if (!contact) return null;
 
     return {
-        contact: contact.value,
-        isNew: false,
+        contact,
+        isNew: Boolean(options?.upsert),
     };
 };
