@@ -1,4 +1,4 @@
-import { model, Schema } from 'mongoose';
+import { model, Schema, Types } from 'mongoose';
 
 const contactsSchema = new Schema({
     name: { type: String, required: true },
@@ -6,6 +6,7 @@ const contactsSchema = new Schema({
     email: { type: String },
     isFavourite: { type: Boolean, default: false },
     contactType: { type: String, enum: ['work', 'home', 'personal'], required: true, default: 'personal' },
+    userId: { type: Types.ObjectId, ref: 'users', required: true },
     },
     {
         timestamps: true,

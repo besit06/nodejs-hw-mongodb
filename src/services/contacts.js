@@ -3,21 +3,22 @@ import { ContactCollection } from "../models/contacts.js";
 import { calculatePaginationData } from "../utils/calculatePaginationData.js";
 
 
-export const createContact = async (payload) => {
-    const contact = await ContactCollection.create(payload);
+export const createContact = async (payload, userId) => {
+    const contact = await ContactCollection.create({ ...payload, userId });
     return contact;
 };
 
-export const deleteContact = async (contactID) => {
+export const deleteContact = async (contactID, userId) => {
     const contact = await ContactCollection.findOneAndDelete({
         _id: contactID,
+        userId,
     });
     return contact;
 };
 
-export const updateContact = async (contactID, payload, options = {}) => {
+export const updateContact = async (contactID, payload, userId, options = {}) => {
     const contact = await ContactCollection.findOneAndUpdate(
-        { _id: contactID },
+        { _id: contactID, userId },
         payload,
         {
             new: true,
@@ -39,11 +40,12 @@ export const getAllContacts = async ({
   sortOrder = SORT_ORDER.ASC,
   sortBy = '_id',
   filter = {},
+  userId,
 }) => {
   const limit = perPage;
   const skip = (page - 1) * perPage;
 
-    const contactsQuery = ContactCollection.find();
+    const contactsQuery = ContactCollection.find({ userId });
 
     if (filter.contactType) {
         contactsQuery.where('contactType').equals(filter.contactType);
@@ -51,7 +53,7 @@ export const getAllContacts = async ({
 
   const contctsCount = await ContactCollection.find()
     .merge(contactsQuery)
-    .countDocuments();
+    .countDocuments({ userId });
 
   const contacts = await contactsQuery
     .skip(skip)
