@@ -3,8 +3,8 @@ import { ContactCollection } from "../models/contacts.js";
 import { calculatePaginationData } from "../utils/calculatePaginationData.js";
 
 
-export const createContact = async (payload, userId) => {
-    const contact = await ContactCollection.create({ ...payload, userId });
+export const createContact = async (payload,) => {
+    const contact = await ContactCollection.create(payload);
     return contact;
 };
 
@@ -51,7 +51,7 @@ export const getAllContacts = async ({
         contactsQuery.where('contactType').equals(filter.contactType);
     }
 
-  const contctsCount = await ContactCollection.find()
+  const contctsCount = await ContactCollection.find({ userId })
     .merge(contactsQuery)
     .countDocuments({ userId });
 
