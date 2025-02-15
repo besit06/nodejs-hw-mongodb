@@ -4,6 +4,11 @@ import fs from 'node:fs/promises';
 import { getEnvVar } from './getEnvVar.js';
 import { CLOUDINARY } from '../constants/index.js';
 
+
+console.log('CLOUDINARY_CLOUD_NAME:', getEnvVar(CLOUDINARY.CLOUD_NAME));
+console.log('CLOUDINARY_API_KEY:', getEnvVar(CLOUDINARY.API_KEY));
+console.log('CLOUDINARY_API_SECRET:', getEnvVar(CLOUDINARY.API_SECRET));
+
 cloudinary.v2.config({
   secure: true,
   cloud_name: getEnvVar(CLOUDINARY.CLOUD_NAME),
