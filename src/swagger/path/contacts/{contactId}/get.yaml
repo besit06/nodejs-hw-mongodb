@@ -1,0 +1,27 @@
+get:
+  tags:
+    - Contacts
+  summary: getContactById
+  operationId: getContactById
+  description: getContactById
+  security:
+    - bearerAuth: []
+  parameters:
+    - name: contactId
+      in: path
+      required: true
+      schema:
+        type: string
+  responses:
+    200:
+      description: Successful request
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/schemas/Contact.yaml'
+    404:
+      description: Contact not Found
+      content:
+        application/json:
+          schema:
+            $ref: '../../components/responses/NotFound.yaml'
