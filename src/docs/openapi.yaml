@@ -35,3 +35,6 @@ components:
     bearerAuth:
       type: http
       scheme: bearer
+  responses:
+    "404":
+      $ref: "../swagger/components/responses/NotFound.yaml"

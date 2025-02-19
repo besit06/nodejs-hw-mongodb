@@ -1,24 +1,24 @@
 tags:
   - Contacts
-summary: сreateContact
+summary: Create a new contact
 operationId: createContact
-description: Add a new contact
+description: Adds a new contact to the database.
 security:
   - bearerAuth: []
 requestBody:
-required: true
-content: null
-application/json: null
-schema: null
-$ref: ../../components/schemas/Contact.yaml
+  required: true
+  content:
+    application/json:
+      schema:
+        $ref: ../../components/schemas/Contact.yaml
 responses:
-"201":
-  description: Contact created successfully
-  content: null
-  application/json: null
-  schema: null
-  $ref: ../../components/schemas/Contact.yaml
-"400":
-  description: Bad request
-"401":
-  description: Unauthorized
+  "201":
+    description: Contact created successfully
+    content:
+      application/json:
+        schema:
+          $ref: ../../components/schemas/Contact.yaml
+  "400":
+    description: Bad request
+  "401":
+    description: Unauthorized

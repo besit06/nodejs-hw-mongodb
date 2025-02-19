@@ -77,31 +77,45 @@
         }
       },
       "post": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string",
-            "example": "60d0fe4f5311236168a109ca"
-          },
-          "name": {
-            "type": "string",
-            "example": "John Doe"
-          },
-          "email": {
-            "type": "string",
-            "format": "email",
-            "example": "johndoe@example.com"
-          },
-          "phone": {
-            "type": "string",
-            "example": "+1234567890"
+        "tags": [
+          "Contacts"
+        ],
+        "summary": "Create a new contact",
+        "operationId": "createContact",
+        "description": "Adds a new contact to the database.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Contact"
+              }
+            }
           }
         },
-        "required": [
-          "name",
-          "email",
-          "phone"
-        ]
+        "responses": {
+          "201": {
+            "description": "Contact created successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Contact"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
       }
     },
     "/contacts/{Id}": {
@@ -200,7 +214,14 @@
             "description": "Unauthorized"
           },
           "404": {
-            "description": "Contact not found"
+            "description": "Contact not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFound"
+                }
+              }
+            }
           }
         }
       },
@@ -234,7 +255,14 @@
             "description": "Unauthorized"
           },
           "404": {
-            "description": "Contact not found"
+            "description": "Contact not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFound"
+                }
+              }
+            }
           }
         }
       }
@@ -270,26 +298,21 @@
         ]
       },
       "NotFound": {
-        "description": "Not Found",
-        "content": {
-          "application/json": {
-            "schema": {
-              "type": "object",
-              "properties": {
-                "message": {
-                  "type": "string",
-                  "example": "Resource not found"
-                }
-              }
-            }
-          }
-        }
+        "description": "Resource not found"
       }
     },
     "securitySchemes": {
       "bearerAuth": {
         "type": "http",
         "scheme": "bearer"
+      }
+    },
+    "responses": {
+      "404": {
+        "$ref": "#/components/responses/NotFound"
+      },
+      "NotFound": {
+        "description": "Resource not found"
       }
     }
   }
