@@ -15,22 +15,22 @@ servers:
 paths:
   /contacts:
     get:
-      $ref: '../swagger/path/contacts/get.yaml'
+      $ref: "../swagger/path/contacts/get.yaml"
     post:
-      $ref: '../swagger/path/contacts/post.yaml'
+      $ref: "../swagger/path/contacts/post.yaml"
 
-  /contacts/{contactId}:
+  /contacts/{Id}:
     get:
-      $ref: '../swagger/path/contacts/{contactId}/get.yaml'
+      $ref: "../swagger/path/contacts/{Id}/get.yaml"
     patch:
-      $ref: '../swagger/path/contacts/{contactId}/patch.yaml'
+      $ref: "../swagger/path/contacts/{Id}/patch.yaml"
     delete:
-      $ref: '../swagger/path/contacts/{contactId}/delete.yaml'
+      $ref: "../swagger/path/contacts/{Id}/delete.yaml"
 
 components:
   schemas:
     Contact:
-      $ref: '../swagger/components/schemas/Contact.yaml'
+      $ref: "../swagger/components/schemas/Contact.yaml"
   securitySchemes:
     bearerAuth:
       type: http
