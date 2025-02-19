@@ -1,0 +1,17 @@
+type: object
+properties:
+  token:
+    type: string
+    example: "eyJhbGciOiJIUzI1NiIsInR..."
+  user:
+    type: object
+    properties:
+      email:
+        type: string
+        example: user@example.com
+      name:
+        type: string
+        example: John Doe
+required:
+  - token
+  - user

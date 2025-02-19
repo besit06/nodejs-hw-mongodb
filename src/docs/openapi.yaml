@@ -29,15 +29,15 @@ paths:
 
   /users/signup:
     post:
-      $ref: "../swagger/paths/users/signup.yaml"
+      $ref: "../swagger/path/users/signup.yaml"
 
   /users/login:
     post:
-      $ref: "../swagger/paths/users/login.yaml"
+      $ref: "../swagger/path/users/login.yaml"
 
   /users/logout:
     post:
-      $ref: "../swagger/paths/users/logout.yaml"
+      $ref: "../swagger/path/users/logout.yaml"
 
 components:
   schemas:
