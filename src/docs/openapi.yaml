@@ -27,6 +27,18 @@ paths:
     delete:
       $ref: "../swagger/path/contacts/{Id}/delete.yaml"
 
+  /users/signup:
+    post:
+      $ref: "../swagger/paths/users/signup.yaml"
+
+  /users/login:
+    post:
+      $ref: "../swagger/paths/users/login.yaml"
+
+  /users/logout:
+    post:
+      $ref: "../swagger/paths/users/logout.yaml"
+
 components:
   schemas:
     Contact:
@@ -38,3 +50,9 @@ components:
   responses:
     "404":
       $ref: "../swagger/components/responses/NotFound.yaml"
+    UserSignup:
+      $ref: "../swagger/components/schemas/UserSignup.yaml"
+    UserLogin:
+      $ref: "../swagger/components/schemas/UserLogin.yaml"
+    AuthResponse:
+      $ref: "../swagger/components/schemas/AuthResponse.yaml"
