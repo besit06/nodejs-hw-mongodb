@@ -1,6 +1,5 @@
 get:
-  tags:
-    - Contacts
+  tags: Contacts
   summary: getContactById
   operationId: getContactById
   description: getContactById
@@ -13,15 +12,15 @@ get:
       schema:
         type: string
   responses:
-    200:
+    "200":
       description: Successful request
       content:
         application/json:
           schema:
-            $ref: '../../components/schemas/Contact.yaml'
-    404:
+            $ref: ../../components/schemas/Contact.yaml
+    "404":
       description: Contact not Found
       content:
         application/json:
           schema:
-            $ref: '../../components/responses/NotFound.yaml'
+            $ref: ../../components/responses/NotFound.yaml
