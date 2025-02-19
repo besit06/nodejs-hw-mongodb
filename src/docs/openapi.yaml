@@ -10,7 +10,7 @@ tags: []
 
 servers:
   - url: http://127.0.0.1:3000
-  - url: http://127.0.0.1:8080
+  - url: https://nodejs-hw7-swagger-qa1r.onrender.com/api-docs
 
 paths:
   /contacts:
