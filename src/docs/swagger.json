@@ -26,7 +26,7 @@
         ],
         "summary": "GetAllContacts",
         "operationId": "GetAllContacts",
-        "description": "GetAllContacts",
+        "description": "Retrieve a list of contacts with optional filtering and pagination.",
         "security": [
           {
             "bearerAuth": []
@@ -36,7 +36,7 @@
           {
             "name": "page",
             "in": "query",
-            "description": "Page number",
+            "description": "Page number (pagination)",
             "required": false,
             "schema": {
               "type": "integer",
@@ -44,7 +44,7 @@
             }
           },
           {
-            "name": "limit",
+            "name": "perPage",
             "in": "query",
             "description": "Number of contacts per page",
             "required": false,
@@ -90,6 +90,21 @@
             "schema": {
               "type": "boolean",
               "example": true
+            }
+          },
+          {
+            "name": "contactType",
+            "in": "query",
+            "description": "Filter by contact type",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "work",
+                "home",
+                "personal"
+              ],
+              "example": "personal"
             }
           }
         ],
@@ -189,6 +204,21 @@
             "schema": {
               "type": "boolean",
               "example": true
+            }
+          },
+          {
+            "name": "contactType",
+            "in": "query",
+            "description": "Filter by contact type",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "work",
+                "home",
+                "personal"
+              ],
+              "example": "personal"
             }
           }
         ],
@@ -442,12 +472,22 @@
           "isFavourite": {
             "type": "boolean",
             "example": true
+          },
+          "contactType": {
+            "type": "string",
+            "enum": [
+              "work",
+              "home",
+              "personal"
+            ],
+            "example": "personal"
           }
         },
         "required": [
           "name",
           "email",
-          "phone"
+          "phone",
+          "contactType"
         ]
       },
       "NotFound": {

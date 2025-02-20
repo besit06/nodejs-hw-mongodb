@@ -20,6 +20,14 @@ parameters:
     schema:
       type: boolean
       example: true
+  - name: contactType
+    in: query
+    description: Filter by contact type
+    required: false
+    schema:
+      type: string
+      enum: [work, home, personal]
+      example: personal
 responses:
   "200":
     description: Contact details

@@ -2,18 +2,18 @@ tags:
   - Contacts
 summary: GetAllContacts
 operationId: GetAllContacts
-description: GetAllContacts
+description: Retrieve a list of contacts with optional filtering and pagination.
 security:
   - bearerAuth: []
 parameters:
   - name: page
     in: query
-    description: Page number
+    description: Page number (pagination)
     required: false
     schema:
       type: integer
       example: 1
-  - name: limit
+  - name: perPage
     in: query
     description: Number of contacts per page
     required: false
@@ -41,8 +41,16 @@ parameters:
     description: Filter by favorite status
     required: false
     schema:
-      type: boolean
+      type: string
       example: true
+  - name: contactType
+    in: query
+    description: Filter by contact type
+    required: false
+    schema:
+      type: string
+      enum: [work, home, personal]
+      example: personal
 responses:
   "200":
     description: Contacts list

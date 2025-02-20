@@ -14,9 +14,14 @@ properties:
     type: string
     example: "+1234567890"
   isFavourite:
-    type: boolean
+    type: string
     example: true
+  contactType:
+    type: string
+    enum: [work, home, personal]
+    example: personal
 required:
   - name
   - email
   - phone
+  - contactType
