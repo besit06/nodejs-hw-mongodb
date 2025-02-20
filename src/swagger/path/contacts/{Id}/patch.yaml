@@ -16,7 +16,25 @@ requestBody:
   content:
     application/json:
       schema:
-        $ref: ../../../components/schemas/Contact.yaml
+        type: object
+        properties:
+          name:
+            type: string
+            example: John Doe
+          email:
+            type: string
+            format: email
+            example: johndoe@example.com
+          phone:
+            type: string
+            example: "+1234567890"
+          isFavourite:
+            type: boolean
+            example: true
+          contactType:
+            type: string
+            enum: ["work", "home", "personal"]
+            example: "work"
 responses:
   "200":
     description: Contact updated!

@@ -13,21 +13,6 @@ parameters:
     schema:
       type: string
       example: 60d0fe4f5311236168a109ca
-  - name: isFavourite
-    in: query
-    description: Filter by favorite status
-    required: false
-    schema:
-      type: boolean
-      example: true
-  - name: contactType
-    in: query
-    description: Filter by contact type
-    required: false
-    schema:
-      type: string
-      enum: [work, home, personal]
-      example: personal
 responses:
   "200":
     description: Contact details
