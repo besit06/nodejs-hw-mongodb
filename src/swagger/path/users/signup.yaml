@@ -8,14 +8,14 @@ requestBody:
   content:
     application/json:
       schema:
-        $ref: "../../components/schemas/UserSignup.yaml"
+        $ref: ../../components/schemas/UserSignup.yaml
 responses:
   "201":
     description: User registered successfully
     content:
       application/json:
         schema:
-          $ref: "../../components/schemas/AuthResponse.yaml"
+          $ref: ../../components/schemas/AuthResponse.yaml
   "400":
     description: Bad request
   "409":

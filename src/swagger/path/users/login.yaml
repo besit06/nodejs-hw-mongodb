@@ -8,14 +8,14 @@ requestBody:
   content:
     application/json:
       schema:
-        $ref: "../../components/schemas/UserLogin.yaml"
+        $ref: ../../components/schemas/UserLogin.yaml
 responses:
   "200":
     description: Successful login
     content:
       application/json:
         schema:
-          $ref: "../../components/schemas/AuthResponse.yaml"
+          $ref: ../../components/schemas/AuthResponse.yaml
   "400":
     description: Invalid credentials
   "401":

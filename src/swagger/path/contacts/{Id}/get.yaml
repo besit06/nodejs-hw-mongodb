@@ -1,26 +1,35 @@
 tags:
   - Contacts
-summary: getContactById
-operationId: getContactById
-description: getContactById
+summary: Get contact by ID
+operationId: GetContactById
+description: Retrieve a contact by its unique ID
 security:
   - bearerAuth: []
 parameters:
   - name: Id
     in: path
+    description: Contact ID
     required: true
     schema:
       type: string
+      example: 60d0fe4f5311236168a109ca
+  - name: isFavourite
+    in: query
+    description: Filter by favorite status
+    required: false
+    schema:
+      type: boolean
+      example: true
 responses:
   "200":
-    description: Successful request
+    description: Contact details
     content:
       application/json:
         schema:
           $ref: ../../../components/schemas/Contact.yaml
+  "401":
+    description: Unauthorized
   "404":
-    description: Contact not Found
-    content:
-      application/json:
-        schema:
-          $ref: ../../../components/responses/NotFound.yaml
+    description: Contact not found
+  "500":
+    description: Server error

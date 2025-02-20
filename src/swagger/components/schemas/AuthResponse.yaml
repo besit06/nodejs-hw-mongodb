@@ -2,7 +2,7 @@ type: object
 properties:
   token:
     type: string
-    example: "eyJhbGciOiJIUzI1NiIsInR..."
+    example: eyJhbGciOiJIUzI1NiIsInR...
   user:
     type: object
     properties:

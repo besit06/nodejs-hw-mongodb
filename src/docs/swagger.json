@@ -14,7 +14,7 @@
       "url": "http://127.0.0.1:3000"
     },
     {
-      "url": "https://nodejs-hw7-swagger-qa1r.onrender.com/api-docs"
+      "url": "https://nodejs-hw7-swagger-qa1r.onrender.com"
     }
   ],
   "tags": [],
@@ -36,7 +36,7 @@
           {
             "name": "page",
             "in": "query",
-            "description": "Page",
+            "description": "Page number",
             "required": false,
             "schema": {
               "type": "integer",
@@ -46,17 +46,56 @@
           {
             "name": "limit",
             "in": "query",
-            "description": "Contacts per page",
+            "description": "Number of contacts per page",
             "required": false,
             "schema": {
               "type": "integer",
               "example": 5
             }
+          },
+          {
+            "name": "sortBy",
+            "in": "query",
+            "description": "Field by which to sort contacts",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "name",
+                "email",
+                "phone"
+              ],
+              "example": "name"
+            }
+          },
+          {
+            "name": "sortOrder",
+            "in": "query",
+            "description": "Sorting order",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "asc",
+                "desc"
+              ],
+              "example": "asc"
+            }
+          },
+          {
+            "name": "isFavourite",
+            "in": "query",
+            "description": "Filter by favorite status",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "example": true
+            }
           }
         ],
         "responses": {
           "200": {
-            "description": "ContactsList",
+            "description": "Contacts list",
             "content": {
               "application/json": {
                 "schema": {
@@ -123,9 +162,9 @@
         "tags": [
           "Contacts"
         ],
-        "summary": "getContactById",
-        "operationId": "getContactById",
-        "description": "getContactById",
+        "summary": "Get contact by ID",
+        "operationId": "GetContactById",
+        "description": "Retrieve a contact by its unique ID",
         "security": [
           {
             "bearerAuth": []
@@ -135,15 +174,27 @@
           {
             "name": "Id",
             "in": "path",
+            "description": "Contact ID",
             "required": true,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "example": "60d0fe4f5311236168a109ca"
+            }
+          },
+          {
+            "name": "isFavourite",
+            "in": "query",
+            "description": "Filter by favorite status",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "example": true
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Successful request",
+            "description": "Contact details",
             "content": {
               "application/json": {
                 "schema": {
@@ -152,15 +203,14 @@
               }
             }
           },
+          "401": {
+            "description": "Unauthorized"
+          },
           "404": {
-            "description": "Contact not Found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/NotFound"
-                }
-              }
-            }
+            "description": "Contact not found"
+          },
+          "500": {
+            "description": "Server error"
           }
         }
       },
@@ -388,6 +438,10 @@
           "phone": {
             "type": "string",
             "example": "+1234567890"
+          },
+          "isFavourite": {
+            "type": "boolean",
+            "example": true
           }
         },
         "required": [

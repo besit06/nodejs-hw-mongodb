@@ -8,21 +8,44 @@ security:
 parameters:
   - name: page
     in: query
-    description: Page
+    description: Page number
     required: false
     schema:
       type: integer
       example: 1
   - name: limit
     in: query
-    description: Contacts per page
+    description: Number of contacts per page
     required: false
     schema:
       type: integer
       example: 5
+  - name: sortBy
+    in: query
+    description: Field by which to sort contacts
+    required: false
+    schema:
+      type: string
+      enum: [name, email, phone]
+      example: name
+  - name: sortOrder
+    in: query
+    description: Sorting order
+    required: false
+    schema:
+      type: string
+      enum: [asc, desc]
+      example: asc
+  - name: isFavourite
+    in: query
+    description: Filter by favorite status
+    required: false
+    schema:
+      type: boolean
+      example: true
 responses:
   "200":
-    description: ContactsList
+    description: Contacts list
     content:
       application/json:
         schema:
