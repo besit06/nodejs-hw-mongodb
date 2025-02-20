@@ -14,7 +14,7 @@ properties:
     type: string
     example: "+1234567890"
   isFavourite:
-    type: string
+    type: boolean
     example: true
   contactType:
     type: string
